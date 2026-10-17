@@ -4,9 +4,9 @@ enum PomodoroState { foco, pausa, descanso } //{focus, pause, break}
 
 class PomodoroController {
   // Tempo padrão de 25 minutos em segundos
-  static const int focusTime = 25 * 60;
-  static const int breakTime = 5 * 60;
-  static const int longBreakTime = 15 * 60;
+  static const int focusTime = 25;
+  static const int breakTime = 5;
+  static const int longBreakTime = 15;
 
   PomodoroState currentMode = PomodoroState.foco;
   int remainingSeconds = focusTime;
@@ -38,6 +38,7 @@ class PomodoroController {
       // A cada 4 ciclos de foco, a pausa é longa; senão, é curta
       if (completedFocusSessions % 4 == 0) {
         currentMode = PomodoroState.descanso;
+        completedFocusSessions = 0; // Reset após a pausa longa
       } else {
         currentMode = PomodoroState.pausa;
       }
